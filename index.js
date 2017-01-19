@@ -7,14 +7,17 @@ canvas.height = window.innerHeight;
 ctx strokeStyle = '#BADA55';
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
+ctx.lineWidth = 100;	
 
 let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
+let hue = 0;
 
 function draw(e) {
 	if (!isDrawing) return; //will stop the the function from running when they are not moused down
 	console.log(e);
+	ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
 	ctx.beginPath();
 	//start from
 	ctx.moveTo(lastX, lastY);
@@ -24,9 +27,14 @@ function draw(e) {
 	lastX = e.offsetX;
 	lastY = e.offsetY;
 	//using ES6 we can write above two line in on. like this: [lastX, lastY]=[e.offsetX, e.offsetY]; this is callet restructring an array
+	hue++;
 }
 
+canvas.addEventListener('mousemdown', () => {
+	isDrawing = true;
+	[lastX, lastY] = [e.offsetX, e.offsetY];
+});
+
 canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mousemdown', () => isDrawing = true);
 canvas.addEventListener('mousemup', () => isDrawing = false);
 canvas.addEventListener('mousemout', () => isDrawing = true);
