@@ -19,6 +19,7 @@ let direction = true;
 function draw(e) {
 	if (!isDrawing) return; //will stop the the function from running when they are not moused down
 	console.log(e);
+
 	ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
 	ctx.beginPath();
 	//start from
