@@ -16,7 +16,6 @@ ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 ctx.lineWidth = 100;
 
-
 let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
@@ -24,7 +23,7 @@ let hue = 0;
 let direction = true;
 
 function draw(e) {
-  if (!isDrawing) return; // stop the fn from running when they are not moused down
+  if (!isDrawing) return; ///will stop the the function from running when they are not moused down
   console.log(e);
   ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   ctx.beginPath();
@@ -33,7 +32,10 @@ function draw(e) {
   // go to
   ctx.lineTo(e.offsetX, e.offsetY);
   ctx.stroke();
-  [lastX, lastY] = [e.offsetX, e.offsetY];
+  lastX = e.offsetX;
+  lastY = e.offsetY;
+  //using ES6 we can write above two line in on. like this: [lastX, lastY]=[e.offsetX, e.offsetY]; this is callet restructring an array
+	
 
   hue++;
   if (hue >= 360) {
@@ -55,7 +57,6 @@ canvas.addEventListener('mousedown', (e) => {
   isDrawing = true;
   [lastX, lastY] = [e.offsetX, e.offsetY];
 });
-
 
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', () => isDrawing = false);
